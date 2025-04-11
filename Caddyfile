@@ -20,7 +20,15 @@
 	}
 }
 
-{$SEARXNG_HOSTNAME}
+{$SEARXNG_HOSTNAME} {
+  log {
+#    output discard
+    output file /var/log/caddy/searxng-access.log {
+      roll_size 20mb
+      roll_keep 2
+      roll_keep_for 720h
+    }
+  }
 
 tls {$SEARXNG_TLS}
 
