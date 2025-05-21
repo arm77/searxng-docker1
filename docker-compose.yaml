@@ -1,23 +1,24 @@
 version: "3.7"
 
 services:
-  caddy:
-    container_name: caddy
-    image: docker.io/library/caddy:2-alpine
-    network_mode: host
-    restart: unless-stopped
-    volumes:
-      - ./Caddyfile:/etc/caddy/Caddyfile:ro
-      - caddy-data:/data:rw
-      - caddy-config:/config:rw
-    environment:
-      - SEARXNG_HOSTNAME=${SEARXNG_HOSTNAME:-http://localhost}
-      - SEARXNG_TLS=${LETSENCRYPT_EMAIL:-internal}
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "1m"
-        max-file: "1"
+# replaced caddy with nginx so can serve two websites/domains (search. and serverd.)
+#  caddy:
+#    container_name: caddy
+#    image: docker.io/library/caddy:2-alpine
+#    network_mode: host
+#    restart: unless-stopped
+#    volumes:
+#      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+#      - caddy-data:/data:rw
+#      - caddy-config:/config:rw
+#    environment:
+#      - SEARXNG_HOSTNAME=${SEARXNG_HOSTNAME:-http://localhost}
+#      - SEARXNG_TLS=${LETSENCRYPT_EMAIL:-internal}
+#    logging:
+#      driver: "json-file"
+#      options:
+#        max-size: "1m"
+#        max-file: "1"
 
   redis:
     container_name: redis
